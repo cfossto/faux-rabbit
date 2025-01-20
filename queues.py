@@ -10,7 +10,7 @@ class Queues:
         else:
             self.queue_id = queue_id
 
-    def add_to_queue(self, topic, message):
+    def add_to_queue(self, topic: str, message):
         item = {
             "topic": topic,
             "message": message
@@ -24,4 +24,3 @@ class Queues:
                 print(self.queue_id, q)
         except Exception as e:
             print(e)
-
