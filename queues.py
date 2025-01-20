@@ -1,20 +1,23 @@
 from queue import Queue
-
+import uuid
 
 class Queues:
 
-    def __init__(self, queue_id):
+    def __init__(self, queue_id=None):
         self.our_queue = Queue()
-        self.queue_id = queue_id
+        if queue_id is None:
+            self.queue_id = uuid.uuid4()
+        else:
+            self.queue_id = queue_id
 
-    def addToQueue(self, topic, message):
+    def add_to_queue(self, topic, message):
         item = {
             "topic": topic,
             "message": message
         }
         self.our_queue.put(item)
 
-    def deQueue(self):
+    def de_queue(self):
         try:
             for i in range(0, self.our_queue.qsize()):
                 q = self.our_queue.get()
