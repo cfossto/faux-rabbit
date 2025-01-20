@@ -1,11 +1,7 @@
-import socket
-import queues
+from queues import Queues
 
 
-queue = queues.Queues()
-
-
-
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serversocket.bind((socket.gethostname(), 8889))
-serversocket.listen()
+q = Queues("testing queue")
+q.addToQueue("greeting","hello")
+q.addToQueue("info","next in line")
+q.deQueue()

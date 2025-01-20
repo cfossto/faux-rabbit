@@ -22,8 +22,3 @@ class Queues:
         except Exception as e:
             print(e)
 
-
-q = Queues("testing queue")
-q.addToQueue("greeting","hello")
-q.addToQueue("info","next in line")
-q.deQueue()
