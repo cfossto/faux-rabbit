@@ -1,6 +1,7 @@
 from queue import Queue
 import uuid
 
+
 class Queues:
 
     def __init__(self, queue_id=None):
@@ -17,10 +18,17 @@ class Queues:
         }
         self.our_queue.put(item)
 
-    def de_queue(self):
+    def de_queue_all(self):
         try:
             for i in range(0, self.our_queue.qsize()):
                 q = self.our_queue.get()
                 print(self.queue_id, q)
+        except Exception as e:
+            print(e)
+
+    def de_queue_one(self):
+        try:
+            q = self.our_queue.get()
+            return q
         except Exception as e:
             print(e)
