@@ -17,3 +17,9 @@ q3.add_to_queue("testagain", "third times a charm")
 q3.add_to_queue("testagain", "four times a charm")
 print(q3.de_queue_one())
 print(q3.de_queue_one())
+
+q4 = Queues(max_size=2)
+
+q4.add_to_queue("q4", "first one")
+q4.add_to_queue("q4:2", "second one")
+print(q4.de_queue_all())
