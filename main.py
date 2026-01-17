@@ -1,4 +1,4 @@
-from queues import Queues
+from src.queues import Queues
 
 
 q = Queues("testing queue")

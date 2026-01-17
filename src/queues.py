@@ -1,13 +1,36 @@
 from queue import Queue
+from abc import ABC, abstractmethod
+from typing import Any
 import uuid
 
 
-class Queues:
+class QueueBase(ABC):
+    @abstractmethod
+    def add_to_queue(self, topic: str, message):
+        pass
+
+    @abstractmethod
+    def list_queue(self):
+        pass
+
+    @abstractmethod
+    def de_queue_all(self):
+        pass
+
+    @abstractmethod
+    def de_queue_one(self):
+        pass
+
+
+class Queues(QueueBase):
     """Object to create queues."""
 
+    def list_queue(self):
+        pass
+
     # Initialize a queue. If there is no name given, give it a random UUID id.
-    def __init__(self, queue_id=None):
-        self.our_queue = Queue()
+    def __init__(self, queue_id=None, max_size: int = 0):
+        self.queue = Queue(maxsize=max_size)
         if queue_id is None:
             self.queue_id = uuid.uuid4()
         else:
@@ -15,18 +38,18 @@ class Queues:
 
     # Add a topic and a message to the Queue.
     # Open ended to allow different type of messages
-    def add_to_queue(self, topic: str, message):
+    def add_to_queue(self, topic: str, message: Any):
         item = {
             "topic": topic,
             "message": message
         }
-        self.our_queue.put(item)
+        self.queue.put(item)
 
     # Dequeues all elements at ones. FIFO.
     def de_queue_all(self):
         try:
-            for i in range(0, self.our_queue.qsize()):
-                q = self.our_queue.get()
+            for i in range(0, self.queue.qsize()):
+                q = self.queue.get()
                 print(self.queue_id, q)
         except Exception as e:
             print(e)
@@ -34,7 +57,7 @@ class Queues:
     # Dequeues one at a time. FIFO.
     def de_queue_one(self):
         try:
-            q = self.our_queue.get()
+            q = self.queue.get()
             return q
         except Exception as e:
             print(e)
